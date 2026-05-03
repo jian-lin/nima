@@ -1,0 +1,3 @@
+{
+  epkgs = epkgs: [ epkgs.eldoc ];
+}

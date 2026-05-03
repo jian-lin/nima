@@ -1,0 +1,1 @@
+(defvar bar 1)
