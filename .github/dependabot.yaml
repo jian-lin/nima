@@ -4,8 +4,16 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+      day: "saturday"
+      time: "09:00"
+      timezone: "Asia/Shanghai"
   - package-ecosystem: "nix"
     directory: "/"
     schedule:
       interval: "cron"
-      cronjob: "59 8 * * *"
+      cronjob: "57 20 * * *"
+      timezone: "Asia/Shanghai"
+    groups:
+      flake-inputs:
+        patterns:
+          - "*"
