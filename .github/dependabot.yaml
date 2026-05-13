@@ -4,7 +4,21 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+      day: "saturday"
+      time: "09:00"
+      timezone: "Asia/Shanghai"
+    commit-message:
+      prefix: "chore"
   - package-ecosystem: "nix"
     directory: "/"
     schedule:
       interval: "weekly"
+      day: "saturday"
+      time: "09:00"
+      timezone: "Asia/Shanghai"
+    commit-message:
+      prefix: "chore"
+    groups:
+      flake-inputs:
+        patterns:
+          - "*"
