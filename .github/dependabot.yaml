@@ -13,7 +13,7 @@ updates:
     directory: "/"
     schedule:
       interval: "cron"
-      cronjob: "57 20 * * *"
+      cronjob: "15 23 * * *"
       timezone: "Asia/Shanghai"
     commit-message:
       prefix: "chore"
