@@ -11,17 +11,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
-      - uses: NixOS/nix-installer-action@446de1db899ec21d0e00635be184b72c6c4ff9a7
+      - uses: cachix/install-nix-action@ab739621df7a23f52766f9ccc97f38da6b7af14f # v31.10.5
         with:
-          extra-conf: |
+          extra_nix_config: |
             experimental-features = nix-command flakes pipe-operators
       - run: nix flake check
   check-links:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
-      - uses: NixOS/nix-installer-action@446de1db899ec21d0e00635be184b72c6c4ff9a7
+      - uses: cachix/install-nix-action@ab739621df7a23f52766f9ccc97f38da6b7af14f # v31.10.5
         with:
-          extra-conf: |
+          extra_nix_config: |
             experimental-features = nix-command flakes pipe-operators
       - run: nix run .#checkLinks -- .
