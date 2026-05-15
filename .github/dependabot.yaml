@@ -5,7 +5,7 @@ updates:
     schedule:
       interval: "weekly"
       day: "saturday"
-      time: "09:00"
+      time: "00:28"
       timezone: "Asia/Shanghai"
     commit-message:
       prefix: "chore"
