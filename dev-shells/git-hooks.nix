@@ -14,6 +14,7 @@
       pre-commit = {
         settings.hooks = {
           # keep-sorted start block=yes
+          actionlint.enable = true;
           checkLocalFileLinks = {
             enable = true;
             name = "Check local file links (files pointed to do exist)";
