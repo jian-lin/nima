@@ -18,14 +18,19 @@
           checkLocalLinks = {
             enable = true;
             name = "Check local links";
-            entry = "${self'.apps.checkLinks.program} --no-progress --offline";
+            entry = self'.apps.checkLinks.program;
+            args = [
+              "--no-progress"
+              "--offline"
+            ];
             types = [ "text" ];
             language = "unsupported";
           };
           genDocsWhenNeeded = {
             enable = true;
             name = "Generate docs when needed";
-            entry = "${self'.apps.genDocs.program} check";
+            entry = self'.apps.genDocs.program;
+            args = [ "check" ];
             files = "^src/";
             types = [ "nix" ];
             pass_filenames = false;
