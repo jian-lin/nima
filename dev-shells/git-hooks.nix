@@ -15,9 +15,9 @@
         settings.hooks = {
           # keep-sorted start block=yes
           actionlint.enable = true;
-          checkLocalFileLinks = {
+          checkLocalLinks = {
             enable = true;
-            name = "Check local file links (files pointed to do exist)";
+            name = "Check local links";
             entry = "${self'.apps.checkLinks.program} --no-progress --offline";
             types = [ "text" ];
             language = "unsupported";
