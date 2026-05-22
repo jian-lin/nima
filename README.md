@@ -49,11 +49,11 @@ and you get the same thing as the return value of `mkNima`.
 [path]: https://nix.dev/manual/nix/latest/language/types.html#type-path
 [lib.fileset]: https://nix.dev/tutorials/working-with-local-files
 
-See [option documentation](docs/generated/options.md)
+See [option documentation](/docs/generated/options.md)
 for available module options.
 
 > [!TIP]
-> There are also [internal options](docs/generated/options-internal.md)
+> There are also [internal options](/docs/generated/options-internal.md)
 > useful for debugging.
 > Use `mkNima'` to get access to them.
 
@@ -129,10 +129,10 @@ In that case, we can further simplify the above file like this
 
 ## Examples
 
-Take a look at these [annotated examples](examples/nima-modules/)
+Take a look at these [annotated examples](/examples/nima-modules/)
 to get a feeling of
 what `nima` configurations look like
-and how to configure a `nima` [feature](docs/generated/options.md#features).
+and how to configure a `nima` [feature](/docs/generated/options.md#features).
 
 Try out Emacsen configured by those examples using commands like
 
