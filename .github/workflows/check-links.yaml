@@ -1,6 +1,12 @@
 name: Check links (local and remote)
 on:
   workflow_call:
+  schedule:
+    - cron: '21 8 * * SAT'
+      timezone: "Asia/Shanghai"
+# zizmor: ignore[concurrency-limits] because
+# - schedule run does not need concurrency
+# - workflow_call run is guarded by the caller workflow's concurrency
 permissions: {}
 jobs:
   check-links:
