@@ -45,6 +45,14 @@
               |> lib.mapAttrsToList (_name: cfg: "${config.nima.generatedDocsDir}/${cfg.filename}");
           };
           treefmt.enable = true;
+          zizmor = {
+            enable = true;
+            entry = self'.apps.zizmor.program;
+            args = [
+              "--no-progress"
+            ];
+            files = "^\\.github/(dependabot\\.|actions/|workflows/)";
+          };
           # keep-sorted end
         };
       };
