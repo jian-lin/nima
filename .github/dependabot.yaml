@@ -13,7 +13,9 @@ updates:
       actions:
         patterns:
           - "*"
-  - package-ecosystem: "nix"
+    cooldown:
+      default-days: 7
+  - package-ecosystem: "nix" # zizmor: ignore[dependabot-cooldown] because dependabot does not support security update for nix
     directory: "/"
     schedule:
       interval: "weekly"
