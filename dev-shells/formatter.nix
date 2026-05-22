@@ -10,9 +10,18 @@
         flakeCheck = !(config.pre-commit.check.enable && config.pre-commit.settings.hooks.treefmt.enable);
 
         programs = {
-          nixfmt.enable = true;
-          deadnix.enable = true;
-          nixf-diagnose.enable = true;
+          deadnix = {
+            enable = true;
+            priority = 1;
+          };
+          nixf-diagnose = {
+            enable = true;
+            priority = 2;
+          };
+          nixfmt = {
+            enable = true;
+            priority = 3;
+          };
         };
 
         programs.yamlfmt.enable = true;
