@@ -35,3 +35,5 @@ jobs:
           extra_nix_config: |
             experimental-features = nix-command flakes pipe-operators
       - run: nix run .#checkLinks -- .
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
