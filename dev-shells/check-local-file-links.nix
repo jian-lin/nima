@@ -18,7 +18,7 @@
         let
           configFile = (pkgs.formats.toml { }).generate "lychee.toml" {
             root_dir = ".";
-            include_fragments = true;
+            include_fragments = "full";
             include_verbatim = true;
             require_https = true;
           };
