@@ -34,7 +34,7 @@ through a Nixpkgs [overlay].
   when `featuresDir` is not `null`.
   The default `collect` function collects all `.nix` files
   in the directory.
-  `featuresDir` must be `null` or of type [path]
+  `featuresDir` must be of type [path]
   when using the default `collect` function.
   You may find [lib.fileset] useful when writing your own `collect` function.
 - `rawOutput` defaults to `false` and
