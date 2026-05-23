@@ -14,12 +14,16 @@ through a Nixpkgs [overlay].
 
 [overlay]: https://wiki.nixos.org/wiki/Overlays#Using_overlays
 
-`mkNima` takes an attribute set
-`{ module ? { },
-featuresDir ? null,
-collect ? collectAllNixFiles,
-rawOutput ? false }`
-as argument.
+`mkNima` takes an attribute set as argument:
+
+```nix
+{
+  module ? { },
+  featuresDir ? null,
+  collect ? collectAllNixFiles,
+  rawOutput ? false
+}
+```
 
 - `module` is a `nima` [module].
 - `featuresDir` is a directory
