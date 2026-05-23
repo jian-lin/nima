@@ -1,7 +1,7 @@
 # nima - Configure Emacs, Declaratively
 
 A thin wrapper around Nixpkgs `emacs.pkgs.withPackages`
-using the [module system]
+using the [module system][]
 with some footguns[^footgun] removed
 
 [module system]: https://nix.dev/tutorials/module-system/
@@ -10,7 +10,7 @@ with some footguns[^footgun] removed
 ## Getting started
 
 `nima` provides `mkNima` function
-through a Nixpkgs [overlay].
+through a Nixpkgs [overlay][].
 
 [overlay]: https://wiki.nixos.org/wiki/Overlays#Using_overlays
 
@@ -25,7 +25,7 @@ through a Nixpkgs [overlay].
 }
 ```
 
-- `module` is a `nima` [module].
+- `module` is a `nima` [module][].
 - `featuresDir` is a directory
   containing [`nima` features](#nima-feature).
 - `collect` is a function taking a directory
@@ -34,9 +34,9 @@ through a Nixpkgs [overlay].
   when `featuresDir` is not `null`.
   The default `collect` function collects all `.nix` files
   in the directory.
-  `featuresDir` must be of type [path]
+  `featuresDir` must be of type [path][]
   when using the default `collect` function.
-  You may find [lib.fileset] useful when writing your own `collect` function.
+  You may find [lib.fileset][] useful when writing your own `collect` function.
 - `rawOutput` defaults to `false` and
   `mkNima` returns a configured Emacs.
   When `rawOutput` is `true`,
@@ -46,7 +46,7 @@ through a Nixpkgs [overlay].
   and you get a configured Emacs,
   which is exactly the return value of `mkNima` when `rawOutput` is `false`.
   Setting `rawOutput` to `true` is for advanced use cases
-  such as debugging by inspecting values of `nima` options in [nix repl]
+  such as debugging by inspecting values of `nima` options in [nix repl][]
   and modifying an already `nima`-configured Emacs via `extendModules`.
 
 [module]: https://nix.dev/tutorials/module-system/a-basic-module/
@@ -66,7 +66,7 @@ for available module options.
 
 Each file under `featuresDir` directory configures a `nima` feature.
 
-Each file is a `nima` [module] like this
+Each file is a `nima` [module][] like this
 
 ```nix
 # epub.nix
@@ -174,8 +174,8 @@ In addition, pull requests are welcome.
 ## Related work
 
 - `emacs.pkgs.withPackages` of Nixpkgs
-- [programs.emacs] of [Home Manager]
-- [emacsWithPackagesFromUsePackage] of [emacs-overlay]
+- [programs.emacs][] of [Home Manager][]
+- [emacsWithPackagesFromUsePackage][] of [emacs-overlay][]
 
 [programs.emacs]: https://nix-community.github.io/home-manager/options.xhtml#opt-programs.emacs.enable
 [emacsWithPackagesFromUsePackage]: https://github.com/nix-community/emacs-overlay#extra-library-functionality
@@ -197,9 +197,9 @@ When you want to make your Emacs configuration more modular
 or want some extra functionalities,
 have a look at its wrappers.
 
-### [programs.emacs] of [Home Manager]
+### [programs.emacs][] of [Home Manager][]
 
-`programs.emacs` also uses the [module system].
+`programs.emacs` also uses the [module system][].
 `nima` and it have different designs,
 resulting in different ways to organize your Emacs configuration.
 `nima` encourages a more modular way.
@@ -207,9 +207,9 @@ resulting in different ways to organize your Emacs configuration.
 In addition, `nima` is not tied to a specific module system
 while `programs.emacs` is part of Home Manager.
 
-### [emacsWithPackagesFromUsePackage] of [emacs-overlay]
+### [emacsWithPackagesFromUsePackage][] of [emacs-overlay][]
 
-`emacsWithPackagesFromUsePackage` does not use the [module system].
+`emacsWithPackagesFromUsePackage` does not use the [module system][].
 As a result, `nima` configurations can be more modular,
 have better error messages and better merging behavior.
 
@@ -222,7 +222,7 @@ automatically find Emacs lisp package dependencies.
 because it is impossible for configurations not using `use-package`.
 
 `emacsWithPackagesFromUsePackage` supports writing your Emacs configuration
-in [literate programming] using Org Babel.
+in [literate programming][] using Org Babel.
 With `nima`, your Emacs configuration
 is organized with `.nix` and optional `.el` files.
 Literate programming support can be added in the future
