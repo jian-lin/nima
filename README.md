@@ -9,22 +9,17 @@ with some footguns[^footgun] removed
 
 ## Getting started
 
-`nima` provides `mkNima` and `mkNima'`
+`nima` provides `mkNima` function
 through a Nixpkgs [overlay].
 
 [overlay]: https://wiki.nixos.org/wiki/Overlays#Using_overlays
 
-`mkNima` is for normal use.
-`mkNima'` is for more advanced use cases such as
-debugging by inspecting values of `nima` options in [nix repl]
-and modifying an already `nima`-configured Emacs via `extendModules`.
-
-[nix repl]: https://nix.dev/manual/nix/latest/command-ref/new-cli/nix3-repl.html
-
 `mkNima` takes an attribute set
-`{ module ? { }, featuresDir ? null, collect ? collectAllNixFiles }`
-as argument
-and returns a configured Emacs.
+`{ module ? { },
+featuresDir ? null,
+collect ? collectAllNixFiles,
+rawOutput ? false }`
+as argument.
 
 - `module` is a `nima` [module].
 - `featuresDir` is a directory
@@ -38,16 +33,22 @@ and returns a configured Emacs.
   `featuresDir` must be `null` or of type [path]
   when using the default `collect` function.
   You may find [lib.fileset] useful when writing your own `collect` function.
-
-`mkNima'` takes the same argument as `mkNima`.
-Instead of returning a configured Emacs,
-it returns an an attribute set which is the output of `lib.evalModules`.
-Taking `config.finalPackage` from that attribute set
-and you get the same thing as the return value of `mkNima`.
+- `rawOutput` defaults to `false` and
+  `mkNima` returns a configured Emacs.
+  When `rawOutput` is `true`,
+  `mkNima` returns the raw output of `lib.evalModules`,
+  which is an attribute set.
+  Taking `config.finalPackage` from that attribute set
+  and you get a configured Emacs,
+  which is exactly the return value of `mkNima` when `rawOutput` is `false`.
+  Setting `rawOutput` to `true` is for advanced use cases
+  such as debugging by inspecting values of `nima` options in [nix repl]
+  and modifying an already `nima`-configured Emacs via `extendModules`.
 
 [module]: https://nix.dev/tutorials/module-system/a-basic-module/
 [path]: https://nix.dev/manual/nix/latest/language/types.html#type-path
 [lib.fileset]: https://nix.dev/tutorials/working-with-local-files
+[nix repl]: https://nix.dev/manual/nix/latest/command-ref/new-cli/nix3-repl.html
 
 See [option documentation](/docs/generated/options.md)
 for available module options.
@@ -55,7 +56,7 @@ for available module options.
 > [!TIP]
 > There are also [internal options](/docs/generated/options-internal.md)
 > useful for debugging.
-> Use `mkNima'` to get access to them.
+> Set `rawOutput` to `true` to get access to them.
 
 ### `nima` feature
 

@@ -4,11 +4,17 @@
   flake.overlays.default =
     final: _prev:
     let
-      mkNima' =
+      collectAllNixFiles = dirPath: dirPath |> fs.fileFilter (file: file.hasExt "nix") |> fs.toList;
+      fs = lib.fileset;
+      inherit (final) lib;
+    in
+    {
+      mkNima =
         {
           module ? { },
           featuresDir ? null,
           collect ? collectAllNixFiles,
+          rawOutput ? false,
         }:
         lib.evalModules {
           class = "nima";
@@ -17,14 +23,8 @@
             (lib.modules.importApply ./_nima.nix { inherit featuresDir collect; })
             module
           ];
-        };
-      collectAllNixFiles = dirPath: dirPath |> fs.fileFilter (file: file.hasExt "nix") |> fs.toList;
-      fs = lib.fileset;
-      inherit (final) lib;
-    in
-    {
-      mkNima = lib.mirrorFunctionArgs mkNima' (args: (mkNima' args).config.finalPackage);
-      inherit mkNima'; # useful for debug
+        }
+        |> (if rawOutput then lib.id else x: x.config.finalPackage);
     };
 
   perSystem =

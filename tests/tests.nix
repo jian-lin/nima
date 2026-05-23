@@ -231,7 +231,7 @@
                 |> lib.testAllTrue;
               testImportModuleDeduplication =
                 let
-                  result = pkgs.mkNima' {
+                  result = pkgs.mkNima {
                     module = {
                       imports = [
                         { config.fooList2 = [ 2 ]; }
@@ -239,6 +239,7 @@
                       ];
                     };
                     featuresDir = ./test-data/testImportModuleDeduplication;
+                    rawOutput = true;
                   };
                 in
                 [
@@ -253,7 +254,10 @@
                 |> lib.testAllTrue;
               testModuleDefinitionLocation =
                 let
-                  result = pkgs.mkNima' { featuresDir = ./test-data/testModuleDefinitionLocation; };
+                  result = pkgs.mkNima {
+                    featuresDir = ./test-data/testModuleDefinitionLocation;
+                    rawOutput = true;
+                  };
                   getFile =
                     feature:
                     lib.head result.options.features.valueMeta.attrs.${feature}.configuration.options.order.files;
