@@ -145,6 +145,10 @@ Try out Emacsen configured by those examples using commands like
 HOME=$(mktemp -d) nix run github:jian-lin/nima#exampleSimple
 ```
 
+## Usage
+
+See [detailed usage](/docs/usage.md).
+
 ## Status
 
 The author dogfoods `nima`
