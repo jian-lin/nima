@@ -44,6 +44,7 @@
                 "details"
                 "summary"
               ];
+              MD054.shortcut = false; # this kind of link is hard to check in MD052
             };
             excludes =
               config.nima.generatedDocs
