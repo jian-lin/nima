@@ -8,10 +8,12 @@
       lib,
       self',
       config,
+      pkgs,
       ...
     }:
     {
       pre-commit = {
+        settings.package = pkgs.pre-commit;
         settings.hooks = {
           # keep-sorted start block=yes
           actionlint.enable = true;
