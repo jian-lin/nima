@@ -11,7 +11,7 @@
       mkDoc =
         { forInternalOptions }:
         (pkgs.nixosOptionsDoc {
-          inherit (pkgs.mkNima' { }) options;
+          inherit (pkgs.mkNima { rawOutput = true; }) options;
           transformOptions = transformOptions forInternalOptions;
         }).optionsCommonMark;
       transformOptions =
