@@ -137,6 +137,22 @@
                 ]
                 ++ t.isWrappedEmacs wrappedEmacs
                 |> lib.testAllTrue;
+              testDefaultElispFile =
+                let
+                  inherit (pkgs) emacs;
+                  wrappedEmacs = pkgs.mkNima {
+                    module = {
+                      package = emacs;
+                    };
+                    featuresDir = ./test-data/testDefaultElispFile;
+                  };
+                in
+                [
+                  (t.defaultElRequires emacs.pkgs.eldoc wrappedEmacs)
+                  (t.defaultElContains "(defvar foo 1)" wrappedEmacs)
+                ]
+                ++ t.isWrappedEmacs wrappedEmacs
+                |> lib.testAllTrue;
               order = {
                 testDefaultOrder =
                   let

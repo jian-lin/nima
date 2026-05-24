@@ -122,17 +122,20 @@ null or absolute path
 
 
 *Default:*
+If this feature is defined
+by a feature file
+under ` featuresDir `,
+it defaults to the path of that feature file
+with ` .nix ` replaced by ` .el `\.
 
-```nix
-null
-```
+Otherwise, it defaults to ` null `\.
 
 
 
 *Example:*
 
 ```nix
-"misc.el"
+"./misc.el"
 ```
 
 *Declared by:*
