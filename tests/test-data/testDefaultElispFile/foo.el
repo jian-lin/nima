@@ -1,0 +1,1 @@
+(defvar foo 1)

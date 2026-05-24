@@ -68,7 +68,16 @@ let
         elispFile = mkOption {
           type = types.nullOr types.path;
           default = null;
-          example = "misc.el";
+          defaultText = lib.literalMD ''
+            If this feature is defined
+            by a feature file
+            under `featuresDir`,
+            it defaults to the path of that feature file
+            with `.nix` replaced by `.el`.
+
+            Otherwise, it defaults to `null`.
+          '';
+          example = "./misc.el";
           description = "Emacs lisp config file for this Emacs feature.";
         };
         order = mkOption {
@@ -183,11 +192,13 @@ in
             ...
           }:
           let
+            elispFileContent =
+              if elispFile == null || !lib.pathExists elispFile then "" else builtins.readFile elispFile;
             elispConfig =
-              if elisp != "" && elispFile != null then
-                throw "nima: `feature.${name}.elisp` and `feature.${name}.elispFile` cannot be set together"
-              else if elispFile != null then
-                builtins.readFile elispFile
+              if elisp != "" && elispFileContent != "" then
+                throw "nima: `feature.${name}.elisp` and `feature.${name}.elispFile` (${toString elispFile}) cannot be set together"
+              else if elispFileContent != "" then
+                elispFileContent
               else
                 elisp;
           in

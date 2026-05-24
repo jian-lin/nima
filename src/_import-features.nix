@@ -14,16 +14,32 @@ let
         else
           moduleLike;
       appliedModule = applyModuleArgsIfFunction (toString modulePath) module moduleArgs;
+      standardizedModule =
+        if isStandardModule appliedModule modulePath then
+          appliedModule
+        else
+          { config.features.${thisFeature} = appliedModule; };
+      defaultElispFileModule = {
+        features.${thisFeature}.elispFile = lib.mkDefault (mkDefaultElispFile modulePath);
+      };
     in
-    if isStandardModule appliedModule modulePath then
-      addModuleFileKeyIfNeeded modulePath appliedModule
-    else
-      # reduce boilerplate in feature files
-      addModuleFileKeyIfNeeded modulePath { config.features.${thisFeature} = appliedModule; };
+    standardizedModule |> addModuleFileKeyIfNeeded modulePath |> addModule defaultElispFileModule;
 
   mkFeatureName =
     modulePath:
-    modulePath |> lib.baseNameOf |> lib.splitString "." |> lib.init |> lib.concatStringsSep ".";
+    modulePath
+    |> lib.baseNameOf
+    |> lib.splitString fileTypeSeperator
+    |> lib.init
+    |> lib.concatStringsSep fileTypeSeperator;
+  mkDefaultElispFile =
+    modulePath:
+    modulePath
+    |> lib.splitString fileTypeSeperator
+    |> lib.init
+    |> (xs: xs ++ [ "el" ])
+    |> lib.concatStringsSep fileTypeSeperator;
+  fileTypeSeperator = ".";
   isStandardModule =
     module: modulePath:
     lib.throwIfNot (lib.isAttrs module) "nima: unsupported module ${modulePath}, see documentation for supported module syntax"
@@ -35,6 +51,12 @@ let
       _file = module._file or toString modulePath;
       key = module.key or toString modulePath;
     };
+  addModule = module1: module2: {
+    imports = [
+      module1
+      module2
+    ];
+  };
 
   # vendor `lib.modules.applyModuleArgsIfFunction` to avoid eval warning of deprecation
   # maybe it'll be undeprecated in the future: https://github.com/NixOS/nixpkgs/issues/519074
