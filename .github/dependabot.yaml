@@ -3,9 +3,8 @@ updates:
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "weekly"
-      day: "saturday"
-      time: "08:21"
+      interval: "cron"
+      cronjob: "21 8 * * *"
       timezone: "Asia/Shanghai"
     commit-message:
       prefix: "chore"
