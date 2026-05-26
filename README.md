@@ -1,4 +1,4 @@
-# nima - Configure Emacs, Declaratively
+# nima - Configure Emacs, Declaratively and Modularly
 
 A thin wrapper around Nixpkgs `emacs.pkgs.withPackages`
 using the [module system][]
