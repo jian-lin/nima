@@ -1,5 +1,5 @@
 {
-  description = "nima: Configure Emacs, Declaratively";
+  description = "nima: Configure Emacs, Declaratively and Modularly";
 
   inputs = {
     # keep-sorted start block=yes
