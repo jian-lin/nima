@@ -29,10 +29,9 @@ for what files in `featuresDir` look like.
 
 ## Standalone
 
-With the following `flake.nix`
-in the current directory,
-you can run the configured Emacs
-using `nix run`.
+With the following `flake.nix`,
+you can run the configured Emacs using `nix run`
+on any systems with Nix installed.
 
 This way of using `nima`
 gives you
