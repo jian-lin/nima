@@ -140,3 +140,11 @@ in
   home.packages = [ myEmacs ];
 }
 ```
+
+> [!WARNING]
+> Do not use `programs.emacs` together with
+> `nima` or any other `emacs.pkgs.withPackages` [wrappers](/README.md#related-work).
+> Patterns like
+> `programs.emacs.package = pkgs.mkNima { /* ... */ }`
+> wrap Emacs twice,
+> which may cause issues.
