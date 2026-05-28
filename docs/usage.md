@@ -123,15 +123,20 @@ and just show an example Home Manager module.
 # nima-home-manager-module.nix
 { pkgs, ... }:
 
+let
+  myEmacs = pkgs.mkNima {
+    # see an annotated example invocation above
+  };
+in
 {
   services.emacs = {
     enable = true;
-    package = pkgs.mkNima {
-      # see an annotated example invocation above
-    };
+    package = myEmacs;
     client.enable = true;
     defaultEditor = true;
     startWithUserSession = true;
   };
+
+  home.packages = [ myEmacs ];
 }
 ```
