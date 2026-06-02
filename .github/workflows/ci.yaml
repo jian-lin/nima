@@ -24,7 +24,7 @@ jobs:
         with:
           extra_nix_config: |
             experimental-features = nix-command flakes pipe-operators
-      - run: nix flake check
+      - run: nix flake check --max-jobs 8
   zizmor:
     name: zizmor (online mode)
     runs-on: ubuntu-latest
