@@ -16,7 +16,10 @@
         }).optionsCommonMark;
       transformOptions =
         forInternalOptions: option:
-        option |> hideNotOurs |> choose forInternalOptions |> formatDeclarationsAsRelativeLinksForOurs;
+        option
+        |> hideNotOurs
+        |> choose forInternalOptions
+        |> formatDeclarationsAsRelativeLinksForOurs;
       isOurs =
         option:
         !lib.elem "_module" option.loc

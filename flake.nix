@@ -50,7 +50,11 @@
             filter = fs.fileFilter (file: isNix file && !isSpecialNix file && !isIgnored file);
             remove = lib.flip fs.difference;
           in
-          filter ./. |> remove ./tests/test-data |> remove ./examples/nima-modules |> fs.toList;
+          ./.
+          |> filter
+          |> remove ./tests/test-data
+          |> remove ./examples/nima-modules
+          |> fs.toList;
         systems = lib.systems.flakeExposed;
       }
     );
