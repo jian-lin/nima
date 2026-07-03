@@ -194,7 +194,7 @@
                   |> lib.testAllTrue;
               };
             };
-            import = {
+            importTests = {
               testImportFeatureFunction =
                 let
                   wrappedEmacs = pkgs.mkNima { featuresDir = ./test-data/testImportFeatureFunction; };
