@@ -22,9 +22,64 @@ pkgs.emacs
 
 
 
+## earlyDefaultEl\.elisp
+
+Emacs lisp config
+that is usually put in ` early-init.el `
+can be put here\.
+
+This Emacs lisp config
+is used to generate ` early-default.el `,
+which is similar to ` early-init.el `\.
+
+This option needs
+[a Nixpkgs PR](https://github\.com/NixOS/nixpkgs/pull/536492)
+to function\.
+Without that PR, this option is basically a no-op\.
+
+To put things in ` default.el `
+(similar to ` init.el `),
+use ` features `\.
+
+
+
+*Type:*
+string
+
+
+
+*Default:*
+
+```nix
+""
+```
+
+
+
+*Example:*
+
+```nix
+''
+  (startup-redirect-eln-cache "my-eln-cache/")
+''
+```
+
+*Declared by:*
+ - [src/_nima\.nix](/src/_nima.nix)
+
+
+
 ## features
 
+
+
 Emacs features\.
+
+Emacs lisp config added here is put into ` default.el `
+(similar to ` init.el `)\.
+To put things in ` early-default.el `
+(similar to ` early-init.el `),
+use ` earlyDefaultEl `\.
 
 
 
