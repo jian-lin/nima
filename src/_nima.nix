@@ -86,7 +86,8 @@ let
           description = ''
             Order affects Emacs feature mergeing.
 
-            For example, Emacs lisp config with larger order comes later in default.el.
+            For example, Emacs lisp config with larger order comes later
+            in {file}`default.el`.
             A similar thing happens to `overlay`.
           '';
         };
@@ -122,14 +123,20 @@ in
         type = types.str;
         internal = true;
         readOnly = true;
-        description = "Content of the generated default.el file.";
+        description = ''
+          Content of generated {file}`default.el`
+          (similar to {file}`init.el`).
+        '';
       };
       file = mkOption {
         type = types.package;
         internal = true;
         readOnly = true;
         default = pkgs.writeText "default.el" config.defaultEl.content;
-        description = "Generated default.el file.";
+        description = ''
+          Generated {file}`default.el`
+          (similar to {file}`init.el`).
+        '';
       };
     };
     finalPackage = mkOption {
