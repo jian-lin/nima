@@ -1,6 +1,7 @@
 ## defaultEl\.content
 
-Content of the generated default\.el file\.
+Content of generated ` default.el `
+(similar to ` init.el `)\.
 
 
 
@@ -16,7 +17,8 @@ string *(read only)*
 
 
 
-Generated default\.el file\.
+Generated ` default.el `
+(similar to ` init.el `)\.
 
 
 

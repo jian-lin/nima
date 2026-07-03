@@ -182,7 +182,8 @@ epkgs: [ epkgs.magit ]
 
 Order affects Emacs feature mergeing\.
 
-For example, Emacs lisp config with larger order comes later in default\.el\.
+For example, Emacs lisp config with larger order comes later
+in ` default.el `\.
 A similar thing happens to ` overlay `\.
 
 
