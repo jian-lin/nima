@@ -41,6 +41,50 @@ A generated file\.  Its content is ` defaultEl.content `\.
 
 
 
+## earlyDefaultEl\.content
+
+
+
+Content of generated ` early-default.el `
+(similar to ` early-init.el `)\.
+
+It consists of
+` earlyDefaultEl.elisp `
+and
+Emacs lisp library boilerplate\.
+
+
+
+*Type:*
+string *(read only)*
+
+*Declared by:*
+ - [src/_nima\.nix](/src/_nima.nix)
+
+
+
+## earlyDefaultEl\.file
+
+
+
+Generated ` early-default.el `
+(similar to ` early-init.el `)\.
+
+
+
+*Type:*
+package *(read only)*
+
+
+
+*Default:*
+A generated file\.  Its content is ` earlyDefaultEl.content `\.
+
+*Declared by:*
+ - [src/_nima\.nix](/src/_nima.nix)
+
+
+
 ## epkgs
 
 

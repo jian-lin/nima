@@ -63,6 +63,27 @@
                 }).drvPath;
               expected = (pkgs.emacs.pkgs.withPackages (_epkgs: [ ])).drvPath;
             };
+            testEarlyDefaultElWithNoFeature =
+              let
+                inherit (pkgs) emacs;
+                wrappedEmacs = pkgs.mkNima {
+                  module = {
+                    package = emacs;
+                    earlyDefaultEl.elisp = ''
+                      (defvar early-bar 1)
+                    '';
+                  };
+                };
+              in
+              [
+                (t.earlyDefaultElContains "(defvar early-bar 1)" wrappedEmacs)
+              ]
+              ++ [
+                (t.epkgsNumber wrappedEmacs == 1)
+                (t.epkgsNameAt 0 wrappedEmacs == "early-default")
+              ]
+              ++ t.isWrappedEmacs wrappedEmacs
+              |> lib.testAllTrue;
             testEnablePedantic = {
               expr =
                 (pkgs.mkNima {
@@ -97,6 +118,10 @@
                   (emacs.pkgs.eglot == wrappedEmacs.emacs.pkgs.myEglot)
                   (t.defaultElRequires emacs.pkgs.eglot wrappedEmacs)
                   (t.defaultElContains "(defvar foo 1)" wrappedEmacs)
+                ]
+                ++ [
+                  (t.epkgsNumber wrappedEmacs == 1)
+                  (t.epkgsNameAt 0 wrappedEmacs == "default")
                 ]
                 ++ t.isWrappedEmacs wrappedEmacs
                 |> lib.testAllTrue;
@@ -150,6 +175,34 @@
                 [
                   (t.defaultElRequires emacs.pkgs.eldoc wrappedEmacs)
                   (t.defaultElContains "(defvar foo 1)" wrappedEmacs)
+                ]
+                ++ t.isWrappedEmacs wrappedEmacs
+                |> lib.testAllTrue;
+              testOneFeatureWithEarlyDefaultEl =
+                let
+                  inherit (pkgs) emacs;
+                  wrappedEmacs = pkgs.mkNima {
+                    module = {
+                      package = emacs;
+                      earlyDefaultEl.elisp = ''
+                        (defvar early-bar 1)
+                      '';
+                    };
+                    featuresDir = ./test-data/testOneFeature;
+                  };
+                in
+                [
+                  (emacs.pkgs.eglot == wrappedEmacs.emacs.pkgs.myEglot)
+                  (t.defaultElRequires emacs.pkgs.eglot wrappedEmacs)
+                  (t.defaultElContains "(defvar foo 1)" wrappedEmacs)
+                ]
+                ++ [
+                  (t.earlyDefaultElContains "(defvar early-bar 1)" wrappedEmacs)
+                ]
+                ++ [
+                  (t.epkgsNumber wrappedEmacs == 2)
+                  (t.epkgsNameAt 0 wrappedEmacs == "default")
+                  (t.epkgsNameAt 1 wrappedEmacs == "early-default")
                 ]
                 ++ t.isWrappedEmacs wrappedEmacs
                 |> lib.testAllTrue;

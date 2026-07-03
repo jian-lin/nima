@@ -163,10 +163,6 @@ In addition, pull requests are welcome.
 
 ## Non-goals
 
-- Configure `early-init.el`:
-  this cannot be done in `nima`,
-  but you can do it outside of `nima`
-  using things like `systemd.tmpfiles` NixOS module option
 - Configure Emacs daemon service:
   this is beyond the scope of `nima`,
   which is configuring Emacs proper

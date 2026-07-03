@@ -106,10 +106,75 @@ in
 {
   options = {
     package = lib.mkPackageOption pkgs "emacs" { };
+    # early-default.el, unlike default.el, should be a very simple file
+    # so we do not use "features" in its implementation
+    # this simple implementation should work well
+    earlyDefaultEl = {
+      elisp = mkOption {
+        type = types.str;
+        default = "";
+        example = ''
+          (startup-redirect-eln-cache "my-eln-cache/")
+        '';
+        description = ''
+          Emacs lisp config
+          that is usually put in {file}`early-init.el`
+          can be put here.
+
+          This Emacs lisp config
+          is used to generate {file}`early-default.el`,
+          which is similar to {file}`early-init.el`.
+
+          This option needs
+          [a Nixpkgs PR](https://github.com/NixOS/nixpkgs/pull/536492)
+          to function.
+          Without that PR, this option is basically a no-op.
+
+          To put things in {file}`default.el`
+          (similar to {file}`init.el`),
+          use {option}`features`.
+        '';
+      };
+      content = mkOption {
+        type = types.str;
+        internal = true;
+        readOnly = true;
+        description = ''
+          Content of generated {file}`early-default.el`
+          (similar to {file}`early-init.el`).
+
+          It consists of
+          {option}`earlyDefaultEl.elisp`
+          and
+          Emacs lisp library boilerplate.
+        '';
+      };
+      file = mkOption {
+        type = types.package;
+        internal = true;
+        readOnly = true;
+        default = pkgs.writeText "early-default.el" config.earlyDefaultEl.content;
+        defaultText = lib.literalMD ''
+          A generated file.  Its content is {option}`earlyDefaultEl.content`.
+        '';
+        description = ''
+          Generated {file}`early-default.el`
+          (similar to {file}`early-init.el`).
+        '';
+      };
+    };
     features = mkOption {
       type = types.attrsOf featureModule;
       default = { };
-      description = "Emacs features.";
+      description = ''
+        Emacs features.
+
+        Emacs lisp config added here is put into {file}`default.el`
+        (similar to {file}`init.el`).
+        To put things in {file}`early-default.el`
+        (similar to {file}`early-init.el`),
+        use {option}`earlyDefaultEl`.
+      '';
     };
     pedantic = lib.mkEnableOption "pedantic mode (failing on elisp compile warnings)";
     epkgs = epkgsOption // {
@@ -170,9 +235,15 @@ in
         isEmptyEpkgs = config.epkgs { } == [ ];
         overlay' = mergeOverlayFunctions [
           config.overlay
-          defaultElOverlay
+          defaultElsOverlay
         ];
-        defaultElOverlay = final: _prev: {
+        defaultElsOverlay = final: _prev: {
+          early-default = final.melpaBuild {
+            pname = "early-default";
+            version = "0.1.0";
+            src = config.earlyDefaultEl.file;
+            turnCompilationWarningToError = config.pedantic;
+          };
           default = final.melpaBuild {
             pname = "default";
             version = "0.1.0";
@@ -182,7 +253,11 @@ in
           };
         };
       in
-      (epkgs: lib.optional (!isEmptyConfig) epkgs.default)
+      (
+        epkgs:
+        lib.optional (config.earlyDefaultEl.elisp != "") epkgs.early-default
+        ++ lib.optional (!isEmptyConfig) epkgs.default
+      )
       |> (config.package.pkgs.overrideScope overlay').withPackages
       |> lib.throwIf (isWrapped config.package) "nima: `package` must be unwrapped Emacs, such as pkgs.emacs or pkgs.emacs-nox";
 
@@ -230,6 +305,26 @@ in
       (provide 'default)
 
       ;;; default.el ends here
+    '';
+    earlyDefaultEl.content = ''
+      ;;; early-default.el --- The early-default.el file  -*- lexical-binding: t; -*-
+
+      ;; Version: 0.1.0
+      ;; Keywords: local
+
+      ;;; Commentary:
+
+      ;;; Code:
+
+      ${config.earlyDefaultEl.elisp}
+
+      ;; Local Variables:
+      ;; eval: (outline-minor-mode)
+      ;; End:
+
+      (provide 'early-default)
+
+      ;;; early-default.el ends here
     '';
   };
 
