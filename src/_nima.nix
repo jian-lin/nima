@@ -133,6 +133,9 @@ in
         internal = true;
         readOnly = true;
         default = pkgs.writeText "default.el" config.defaultEl.content;
+        defaultText = lib.literalMD ''
+          A generated file.  Its content is {option}`defaultEl.content`.
+        '';
         description = ''
           Generated {file}`default.el`
           (similar to {file}`init.el`).

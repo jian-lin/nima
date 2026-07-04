@@ -28,10 +28,7 @@ package *(read only)*
 
 
 *Default:*
-
-```nix
-<derivation default.el>
-```
+A generated file\.  Its content is ` defaultEl.content `\.
 
 *Declared by:*
  - [src/_nima\.nix](/src/_nima.nix)
