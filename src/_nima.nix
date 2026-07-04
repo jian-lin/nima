@@ -126,6 +126,12 @@ in
         description = ''
           Content of generated {file}`default.el`
           (similar to {file}`init.el`).
+
+          It consists of
+          {option}`features.<name>.elisp` or {option}`features.<name>.elispFile`
+          (when {option}`features.<name>.enable` is `true`)
+          and
+          Emacs lisp library boilerplate.
         '';
       };
       file = mkOption {

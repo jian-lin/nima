@@ -3,6 +3,12 @@
 Content of generated ` default.el `
 (similar to ` init.el `)\.
 
+It consists of
+` features.<name>.elisp ` or ` features.<name>.elispFile `
+(when ` features.<name>.enable ` is ` true `)
+and
+Emacs lisp library boilerplate\.
+
 
 
 *Type:*
