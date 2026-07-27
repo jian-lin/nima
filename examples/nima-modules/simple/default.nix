@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 {
-  package = pkgs.emacs-pgtk; # choose your Emacs variant
+  package = pkgs.emacs; # choose your Emacs variant, such as pkgs.emacs-pgtk
 
   # you can think this as early-init.el
   earlyDefaultEl.elisp = ''
