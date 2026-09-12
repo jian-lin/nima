@@ -14,7 +14,15 @@
       pre-commit = {
         settings.hooks = {
           # keep-sorted start block=yes
-          actionlint.enable = true;
+          actionlint = {
+            enable = true;
+            args = [
+              # this new self-repository syntax was added in 2026-07-30
+              # actionlint doesn't support it: https://github.com/rhysd/actionlint/issues/711
+              # ignore its error for now
+              ''-ignore=reusable workflow call "\$/.+" at "uses" is not following the format''
+            ];
+          };
           checkLocalLinks = {
             enable = true;
             name = "Check local links";
