@@ -35,4 +35,4 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   check-links:
-    uses: ./.github/workflows/check-links.yaml
+    uses: $/.github/workflows/check-links.yaml
