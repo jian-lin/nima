@@ -27,3 +27,5 @@ updates:
       flake-inputs:
         patterns:
           - "*"
+    cooldown:
+      default-days: 0
